@@ -3,3 +3,6 @@ GET http://localhost:3003/test
 
 ###
 GET http://localhost:3003/products
+
+###
+GET http://localhost:3003/set-new-quantity

@@ -1,3 +1,4 @@
+import { NumberLiteralType } from "typescript";
 import { Product } from "../models/Product";
 import { BaseDatabase } from "./DB";
 import { TABLE_STOCK } from "./TABLE_NAMES";
@@ -8,12 +9,18 @@ export class StockDB extends BaseDatabase{
         const result:Product[] = await BaseDatabase.connection(TABLE_STOCK).select()
         return result
     }
-    public async getStockItemById(){
-        const result:Product[] = await BaseDatabase.connection(TABLE_STOCK).select()
-        return result
-    }
+    
+    public async setNewQty(id:number, qty:number){
+        let product = await BaseDatabase.connection(TABLE_STOCK)
+        .select()
+        .where({id})
 
-    public async setNewQty(id:number){
+        const oldQty:number = product[0].qty_stock
+        const newQty = oldQty - qty
+
+        await BaseDatabase.connection(TABLE_STOCK)
+        .update({qty_stock:newQty})
+        .where({id})
 
     }
     
