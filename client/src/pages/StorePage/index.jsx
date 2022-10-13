@@ -1,30 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Container, Header} from './styles'
 import logo from '../../assets/shopper-logo.png'
 import { Button, Switch  } from "@mui/material";
 import axios from 'axios';
+import useRequestData from "../../hooks/useRequestData";
+import { url } from "../../BaseURL/BASE_URL";
+import ProductCard from "./productCard";
+
 
 
 
 
 const StorePage=()=>{
+    const [data,isLoading,error] = useRequestData(`${url}/products`)
 
-   const [darkmode,setDarkmode] = useState(false)
-   const changeTheme = () =>{
-    setDarkmode(!darkmode)
-    console.log(darkmode)
-   }
-   const getProducts = async ()=>{
-    return await axios.get("http://localhost:3003/products")
-   }
-    const products = getProducts()
 
-    const productsRender = products && products.data
-            
-        console.log(productsRender)
-   
   
-   
+
+    const productsRender = data?.map((item)=>{return <li key={item.id}>{item.name}</li>})
+  
+    
    
   return (
     
@@ -35,7 +30,7 @@ const StorePage=()=>{
             <div>
             <Button variant="contained" color="secondary">Estoque</Button>
             <Switch
-                onChange={changeTheme}
+                // onChange={teste}
                 name="loading"
                 color="secondary"
             />
