@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import {Container, Header} from './styles'
+import {Container, Header, ProductsList} from './styles'
 import logo from '../../assets/shopper-logo.png'
 import { Button, Switch  } from "@mui/material";
 import useRequestData from "../../hooks/useRequestData";
@@ -82,7 +82,10 @@ const StorePage=()=>{
             </div>   
         </Header>
         <ErrorModal/>
-        {productsRender}
+        <ProductsList>
+            {productsRender}
+        </ProductsList>
+        
         
    </Container>
    

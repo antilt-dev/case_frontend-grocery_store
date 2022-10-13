@@ -1,8 +1,9 @@
-import React,{useState,useContext} from 'react';
+import React,{useContext} from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import GlobalContext from '../contexts/GlobalContext';
+import alertImg from '../assets/alert-error.png'
 
 const modalStyle = {
   position: 'absolute',
@@ -24,7 +25,7 @@ const textStyle = {
     textAlign:"center"
 }
 
-export default function ErrorModal(isOpen) {
+export default function ErrorModal() {
 
   const {openModalError,setOpenModalError} = useContext(GlobalContext)
 
@@ -41,10 +42,10 @@ export default function ErrorModal(isOpen) {
             Não foi possível adicionar este produto
           </Typography>
           <Typography>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/OOjs_UI_icon_alert_destructive.svg/1200px-OOjs_UI_icon_alert_destructive.svg.png" style={{width: "50px"}}alt="error"/>
+            <img src={alertImg} style={{width: "50px"}}alt="error"/>
           </Typography> 
           <Typography sx={textStyle} id="modal-modal-description" >
-           Nosso estoque deste produto não conta com quantidade suficiente para atender sua solicitação.
+            Nosso estoque deste produto não conta com quantidade suficiente para atender sua solicitação.
           </Typography>
         </Box>
       </Modal>

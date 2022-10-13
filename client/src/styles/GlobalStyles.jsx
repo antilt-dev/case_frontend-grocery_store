@@ -6,7 +6,12 @@ export default createGlobalStyle`
         margin:0;
         box-sizing:border-box;
         font-family: 'Roboto', sans-serif;
+    }
 
+    #root{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
     }
    
 `;

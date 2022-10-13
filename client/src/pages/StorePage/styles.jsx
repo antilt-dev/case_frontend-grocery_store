@@ -31,3 +31,13 @@ export const Header = styled.header`
         padding: 0 20px;
      }
 `;
+
+export const ProductsList = styled.main`
+   width:100%;
+   min-height:100%;
+   display:flex;
+   justify-content:center;
+   flex-wrap:wrap;
+   gap:5px;
+   padding:50px;
+`;
