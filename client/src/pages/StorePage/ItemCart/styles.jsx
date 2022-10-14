@@ -44,15 +44,21 @@ export const ProductInfo = styled.div`
     width:100%;
     display:flex;
     flex-direction:row;
-    align-items:center;
+    align-items:flex-start;
     justify-content:space-between;
-    padding:0 20px;
+    padding:10px 20px;
     height:50%;
     
 
     p,span{
         font-size:16px;
     }
+
+    p{
+        max-width:80%;
+    }
+
+   
 
     
     `;

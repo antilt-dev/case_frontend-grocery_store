@@ -93,9 +93,10 @@ const StorePage=()=>{
         const newCart = cart.map((item)=>{   
             if(item.id === id && qty > productStock){
                 setOpenModalError(true)
+
             }
 
-            if(item.id === id){
+            if(item.id === id && qty <= productStock){
                 item.units = qty
                 return item
             }else{

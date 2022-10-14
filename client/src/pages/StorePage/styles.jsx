@@ -40,6 +40,7 @@ export const Cart = styled.div`
     flex-direction:column;
     align-items:center;
     background-color:yellow;
+    padding:0 10px;
 `;
 
 export const ClientForm = styled.div`
