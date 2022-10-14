@@ -8,10 +8,17 @@ export default createGlobalStyle`
         font-family: 'Roboto', sans-serif;
     }
 
-    #root{
+    #root,body,html{
         display:flex;
         flex-direction:column;
         align-items:center;
-    }
+        overflow-y:scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none; 
+        &::-webkit-scrollbar{
+            width:0;
+            height:0;
+        }
+        }
    
 `;

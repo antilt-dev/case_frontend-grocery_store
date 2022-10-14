@@ -7,31 +7,6 @@ export const Container = styled.div`
     background-color:#E8F9F3;
 `;
 
-export const Header = styled.header`
-    width:100%;
-    height:80px;
-    background-color:rgb(255,255,255);
-    border-top:8px solid rgb(45,167,122);
-    box-shadow:0px 5px 20px rgb(0 45 98 / 6%);
-    padding:0 113px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-     
-     img{
-        max-height:80%;
-        cursor:pointer;
-     }
-
-     @media (max-width:800px){
-        padding: 0 50px;
-     }
-
-     @media (max-width:500px){
-        padding: 0 20px;
-     }
-`;
-
 export const ProductsList = styled.main`
    width:100%;
    min-height:100%;
@@ -40,4 +15,46 @@ export const ProductsList = styled.main`
    flex-wrap:wrap;
    gap:5px;
    padding:50px;
+`;
+
+export const Sidebar = styled.aside`
+    width:420px;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+    position:absolute;
+    right:50%;
+    top:200px;
+`;
+
+export const CartButton = styled.div`
+    width:25px;
+    height:25px;
+`;
+
+export const Cart = styled.div`
+    width:100%;
+    height:100%;
+    gap:10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:yellow;
+`;
+
+export const ClientForm = styled.div`
+    width:80%;
+    height:100px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+`;
+
+export const ProductsCart = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
 `;

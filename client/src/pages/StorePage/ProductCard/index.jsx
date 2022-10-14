@@ -8,7 +8,7 @@ const ProductCard=({name,price,id,onClick})=>{
   const formatedPrice = price.toString().split(".").join(",")
   return (
    <Container>
-      <img src={productImg} alt="uma imagem"/>
+      <img src={productImg} alt="no product image"/>
       <p>{name}</p>
       <p>R$ <span>{formatedPrice}</span></p>
       <Button variant="outlined" color="secondary" onClick={()=>onClick(id)}>Adicionar</Button>

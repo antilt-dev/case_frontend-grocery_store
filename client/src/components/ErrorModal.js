@@ -39,13 +39,13 @@ export default function ErrorModal() {
       >
         <Box sx={modalStyle}>
           <Typography sx={textStyle} id="modal-modal-title" variant="h6" component="h2">
-            Não foi possível adicionar este produto
+            Não foi possível adicionar esta quantidade!
           </Typography>
           <Typography>
             <img src={alertImg} style={{width: "50px"}}alt="error"/>
           </Typography> 
           <Typography sx={textStyle} id="modal-modal-description" >
-            Nosso estoque deste produto não conta com quantidade suficiente para atender sua solicitação.
+            Nosso estoque deste produto não conta com unidades suficientes para atender sua solicitação.
           </Typography>
         </Box>
       </Modal>

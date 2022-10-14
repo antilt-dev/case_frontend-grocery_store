@@ -13,10 +13,17 @@ import GlobalContext from "../../contexts/GlobalContext";
 const Router=()=>{
     const [darkmode,setDarkmode] = useState(false)
     const [openModalError,setOpenModalError] = useState(false)
+    const [cart,setCart] = useState([])
 
   return (
    <Container>
-        <GlobalContext.Provider value={{darkmode,setDarkmode,openModalError,setOpenModalError}}>
+        <GlobalContext.Provider value={{darkmode,
+            setDarkmode,
+            openModalError,
+            setOpenModalError,
+            cart,
+            setCart
+            }}>
             <ThemeProvider theme={darkmode?dark:light}>
                 <BrowserRouter>
                     <Routes>
