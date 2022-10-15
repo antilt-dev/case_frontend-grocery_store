@@ -6,8 +6,7 @@ export const Container = styled.div`
     display:flex;
     flex-direction:column;
     align-items:flex-start;
-
-    border:solid 1px black;
+    border-bottom:solid 0.3px #b7b7b7;
 `;
 
 export const Buttons = styled.div`
@@ -51,7 +50,7 @@ export const ProductInfo = styled.div`
     
 
     p,span{
-        font-size:16px;
+        font-size:14px;
     }
 
     p{

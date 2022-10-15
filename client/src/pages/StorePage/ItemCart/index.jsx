@@ -16,14 +16,14 @@ const ItemCart=({name,price,id,qty,sumUp,decrease,remove,setCart,setQty})=>{
         <Buttons>
             <div>
             <Tooltip title="Remove" >
-                <IconButton>
-                    <RemoveCircleIcon  onClick={()=>decrease(id)} />
+                <IconButton onClick={()=>decrease(id)} >
+                    <RemoveCircleIcon  />
                 </IconButton>
             </Tooltip>
             <input value={qty} onChange={(e)=>setQty(id,e.target.value)}/>
             <Tooltip title="Add" >
-                <IconButton>
-                    <AddCircleIcon onClick={()=>sumUp(id)}/>
+                <IconButton onClick={()=>sumUp(id)}>
+                    <AddCircleIcon />
                 </IconButton>
             </Tooltip>
             </div>

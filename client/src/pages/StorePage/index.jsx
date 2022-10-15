@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {Cart, ClientForm, Container, ProductsList, Sidebar} from './styles'
-import logo from '../../assets/shopper-logo.png'
-import { Button, Switch  } from "@mui/material";
+import {Cart, CartButton, ClientForm, Container, ProductsList, Sidebar} from './styles'
 import useRequestData from "../../hooks/useRequestData";
 import { url } from "../../BaseURL/BASE_URL";
 import ProductCard from "./ProductCard";
@@ -9,18 +7,82 @@ import ErrorModal from "../../components/ErrorModal";
 import GlobalContext from "../../contexts/GlobalContext";
 import Header from "../../components/Header";
 import ItemCart from "./ItemCart";
-
-
-
+import ButtonCart from "./ButtonCart";
+import { Button, IconButton, TextField } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import { SpinnerCircularSplit	 } from 'spinners-react';
 
 
 
 const StorePage=()=>{
     const [data,isLoading,error] = useRequestData(`${url}/products`)
-    
+    const [cartUnits,setCartUnits] = useState(0)
+    const [openCart,setOpenCart] = useState(false)
+    const [cartPrice,setCartPrice] = useState(0)
+    const [deliveryDate,setDeliveryDate] = useState("")
+    const [userName,setUserName] = useState("")
     const {setOpenModalError,cart,setCart} = useContext(GlobalContext)
-  
 
+    useEffect(()=>{calculetePriceCart();calculateQtyProductsCart()},[cart])
+
+//checks if the product exists in the cart and calls the appropriate function to add it to the cart
+    const onClickAddProduct = (id) =>{
+        const checkCart = cart.find((product)=>{
+            return product.id === id 
+        })
+
+        checkCart?sumUpProduct(id):addNewProductCart(id)   
+        
+    }
+
+//calculates quantity of items in cart
+    const calculateQtyProductsCart = () =>{
+       if(cart.length >0){
+        let totalUnits = cart.map((product)=>{
+            return product.units  
+        })
+
+        totalUnits = totalUnits.reduce((prev,curr)=>{
+           return prev+curr
+       } )
+    setCartUnits(totalUnits)
+       }else{
+        return 0
+       }     
+    }
+
+//calculates price of items in cart    
+    const calculetePriceCart = () =>{
+        if(cart.length >0){
+         let totalValue = cart.map((product)=>{
+             return product.units * product.price 
+         })
+ 
+         totalValue = totalValue.reduce((prev,curr)=>{
+            return prev+curr
+        } )
+        setCartPrice(totalValue)
+        }else{
+         return 0
+        }     
+     }
+
+
+//adds a new item to the cart
+    const addNewProductCart = (id)=>{
+        const product = data.filter((item)=> item.id === id)
+        
+        const newProductCart = {
+            name: product[0].name,
+            units:1,
+            price:product[0].price,
+            id
+        }
+        setCart([...cart,newProductCart])
+        setOpenCart(true)
+    }
+
+//adds a unit to the cart item
     const sumUpProduct = (id) =>{
         
         let productStock = data.filter((product)=>{
@@ -43,8 +105,10 @@ const StorePage=()=>{
             }
         })
         setCart(newCart)
+        setOpenCart(true)
     }
 
+//removes one unit of the item from the cart
     const decreaseProduct  = (id) =>{
         
         let newCart = cart.map((product)=>{
@@ -61,6 +125,7 @@ const StorePage=()=>{
          setCart(newCart)
     }
 
+//removes the product from the cart
     const removeProduct = (id)=>{
         const newCart = cart.filter((product)=>{
             return product.id !== id
@@ -68,19 +133,8 @@ const StorePage=()=>{
 
         setCart(newCart)
     }
-
-    const addNewProductCart = (id)=>{
-        const product = data.filter((item)=> item.id === id)
-        
-        const newProductCart = {
-            name: product[0].name,
-            units:1,
-            price:product[0].price,
-            id
-        }
-        setCart([...cart,newProductCart])
-    }
-
+ 
+//adds a user-selected quantity to the item
     const setManualQty = (id,qty) =>{
         
         let productStock = data.filter((product)=>{
@@ -106,17 +160,7 @@ const StorePage=()=>{
         setCart(newCart)
     }
 
-    const onClickAddProduct = (id) =>{
-        const checkCart = cart.find((product)=>{
-            return product.id === id 
-        })
-
-        checkCart?sumUpProduct(id):addNewProductCart(id)   
-        
-    }
-  
-
-    const productsRender = data?.map((item)=>{
+    const productsRenderList = data?.map((item)=>{
         return <ProductCard 
                 name={item.name} 
                 price={item.price} 
@@ -126,7 +170,7 @@ const StorePage=()=>{
                 />
     })
 
-    const cartRender = cart.map((item)=>{
+    const cartRenderList = cart.map((item)=>{
         return <ItemCart 
                 key={item.id} 
                 id={item.id}
@@ -138,26 +182,55 @@ const StorePage=()=>{
                 remove={removeProduct}
                 setQty={setManualQty}
                 />
-
     })
     
+   
    
   return (
     
    <Container>
-        <Header buttonChildren="Estoque"/>
+        <Header 
+            buttonChildren="Estoque"
+            buttonCart={<ButtonCart price={cartPrice} itemsCart={cartUnits} toggleCart={()=>setOpenCart(!openCart)} />}
+        />
         <ErrorModal/>
         <ProductsList>
-            {productsRender}
+            {isLoading && <SpinnerCircularSplit	 />}
+            {productsRenderList}
         </ProductsList>
-        <Sidebar>
+        <Sidebar openCart={openCart}>
             <Cart>
-                <ClientForm>
+                <div style={{width:"100%",display:"flex",alignItems:"center", gap:"10px"}}>
+                    <IconButton aria-label="close" onClick={()=>setOpenCart(!openCart)}>
+                        <CloseIcon  />
+                    </IconButton>
+                    <h3>Seu Pedido</h3>
+                </div>
                 
+                <ClientForm>
+                    <TextField
+                        required
+                        label="Nome"
+                        variant="outlined"
+                        color="secondary"
+                        value={userName}
+                        onChange={(e)=>setUserName(e.target.value)} 
+                        fullWidth
+                    />
+                    <TextField 
+                        required 
+                        label="Data da entrega"
+                        variant="outlined"
+                        type="date"
+                        color="secondary"
+                        value={deliveryDate}
+                        onChange={(e)=>setDeliveryDate(e.target.value)} 
+                        fullWidth
+                        InputLabelProps={{shrink: true}}
+                    />
                 </ClientForm>
-                {cartRender}
-                    
-               
+                {cartRenderList}
+                <Button variant="contained" color="secondary">Fechar Pedido</Button>
             </Cart>
         </Sidebar>
         
