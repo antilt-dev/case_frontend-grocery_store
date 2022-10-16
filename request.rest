@@ -10,12 +10,12 @@ Content-Type: application/json
     "date":"25/11/2022",
     "purchasedItems":[
         {
-            "id":116,
-            "quantity":2
+            "id":16,
+            "quantity":159
         },
         {
-            "id":16,
-            "quantity":2
+            "id":18,
+            "quantity":1590
         }
     ]
 
