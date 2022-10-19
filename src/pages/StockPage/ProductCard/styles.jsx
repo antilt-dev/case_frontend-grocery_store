@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width:100%;
-    min-width:380px;
+    min-width:350px;
     height:30px;
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:space-between;
     border-bottom:solid var(--bgCard) 2px;
+    padding:0 5px;
 
     p{
         text-overflow:ellipsis;

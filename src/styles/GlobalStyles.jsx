@@ -19,6 +19,8 @@ export default createGlobalStyle`
             width:0;
             height:0;
         }
+        color:var(--txtCard);
+        scroll-behavior: smooth;
 
         --bgCard:${props=>props.theme.bgCard};
         --txtCard:${props=>props.theme.txtCard};

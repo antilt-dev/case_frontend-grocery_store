@@ -1,11 +1,28 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    min-width:100vw;
-    max-width:100%;
+    width:100vw;
     min-height:100vh;
     min-width:350px;
     background-color:var(--bgPages);
+    
+`;
+
+export const Tools = styled.div`
+    width:100%;
+    min-height:120px;
+    padding-top:80px;
+    background-color:var(--bgHeader);
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    display:none;
+    
+
+    @media(max-width:550px){
+        display:flex;
+    }
 `;
 
 export const ProductsList = styled.main`
@@ -62,6 +79,12 @@ export const Cart = styled.form`
             font-size:20px;
             color:var(--spnCard);
         }
+    div:nth-child(1){
+        width:100%;
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
 `;
 
 export const ClientForm = styled.div`

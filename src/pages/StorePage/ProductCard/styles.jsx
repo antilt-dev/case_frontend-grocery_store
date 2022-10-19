@@ -13,7 +13,7 @@ export const Container = styled.div`
     padding:20px 0;
     border-radius:15px;
 
-    @media(max-width:500px){
+    @media(max-width:520px){
         width:160px;
         height:275px;
     }
@@ -41,6 +41,7 @@ export const Container = styled.div`
         color:var(--spnCard);
         font-size:16px;
         font-weight:bold;
+        letter-spacing:1px;
     }
     button{
         flex:none;

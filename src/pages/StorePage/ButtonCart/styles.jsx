@@ -6,13 +6,13 @@ export const Container = styled.div`
     display:flex;
     align-items:flex-end;
     justify-content:center;
-    border-bottom:solid 0.1px rgb(45,167,122);
+    border-bottom:solid 0.1px var(--spnCard);
     border-radius:10px;
 
     p{
         font-size:16px;
         margin-bottom:10px;
         font-weight:bold;
-        color:rgb(45,167,122);
+        color:var(--spnCard);
     }
 `;

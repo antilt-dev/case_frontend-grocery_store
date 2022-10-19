@@ -6,7 +6,7 @@ export const Container = styled.div`
     display:flex;
     flex-direction:column;
     align-items:flex-start;
-    border-bottom:solid 0.3px #b7b7b7;
+    border-bottom:solid 0.3px var(--txtCard);
 `;
 
 export const Buttons = styled.div`
@@ -33,7 +33,7 @@ export const Buttons = styled.div`
         height:60%;
         width:50px;
         border-radius:10px;
-        border:1px solid #b7b7b7;
+        border:1px solid var(--txtCard);
         padding:0 10px;
         text-align:center;
     }
@@ -51,6 +51,7 @@ export const ProductInfo = styled.div`
 
     p,span{
         font-size:14px;
+        color:var(--txtCard)
     }
 
     p{

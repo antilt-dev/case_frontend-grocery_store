@@ -1,21 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Cart, ClientForm, Container, ProductsList, Sidebar, styleTextField} from './styles'
+import {Cart, ClientForm, Container, ProductsList, Sidebar, Tools} from './styles'
 import useRequestData from "../../hooks/useRequestData";
 import { url } from "../../BaseURL/BASE_URL";
 import ProductCard from "./ProductCard";
 import GlobalContext from "../../contexts/GlobalContext";
 import Header from "../../components/Header";
 import ItemCart from "./ItemCart";
-import ButtonCart from "./ButtonCart";
 import { Button, IconButton, TextField } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { SpinnerCircularSplit	 } from 'spinners-react';
-import { goHome, goStock } from "../../routes/coordinator";
+import { goStock } from "../../routes/coordinator";
 import sendOrder from "../../services/sendOrder";
 import SucessModal from "../../components/SucessModal";
 import FailedModal from "../../components/FailedModal";
 import ErrorModal from "../../components/ErrorModal";
+import DarkSwitch from "../../components/DarkSwitch";
 
 
 
@@ -37,10 +37,10 @@ const StorePage=()=>{
             setOpenModalFailed,
             cart,
             setCart,
-            darkMode,
-            setDarkMode
+            darkMode
             } = useContext(GlobalContext)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{updateCart()},[cart])
 
 //checks if the product exists in the cart and calls the appropriate function to add it to the cart
@@ -182,15 +182,19 @@ const updateCart = () =>{
         setCart(newCart)
     }
 
-//clear forms 
-    const clearStates = () =>{
-        setUserName("")
-        setDeliveryDate("")
+//clear Cart
+    const clearCart = () =>{
         setCart([])
         setCartPrice(0)
         setCartUnits(0)
-        setOpenCart(false)
     }
+
+//clear form
+
+const clearForm = () =>{
+    setUserName("")
+    setDeliveryDate("")
+}
 
 //send place order to database
 const onPlaceOrder = () => {
@@ -207,7 +211,9 @@ const onPlaceOrder = () => {
 
     }
     sendOrder(`${url}/purchases`,body,setOpenModalSucess,setOpenModalFailed,setErrorModal)
-    clearStates()
+    clearCart()
+    clearForm()
+    setOpenCart(false)
 }
 
 
@@ -243,13 +249,17 @@ const onPlaceOrder = () => {
         <Header 
             buttonChildren="Estoque"
             onClickNavigate={()=> goStock(navigate)}
-            buttonCart={<ButtonCart price={cartPrice} itemsCart={cartUnits} toggleCart={()=>setOpenCart(!openCart)} />}
+            price={cartPrice}
+            itemsCart={cartUnits}
+            toggleCart={()=>setOpenCart(!openCart)}
         />
         
         <SucessModal/>
         <FailedModal error={errorModal}/>
         <ErrorModal/>
-
+        <Tools>
+            <DarkSwitch/>
+        </Tools>
         <ProductsList>
             {isLoading && !error && <SpinnerCircularSplit/>}
             {error && <p>Erro ao carregar os produtos.</p>}
@@ -257,8 +267,12 @@ const onPlaceOrder = () => {
         </ProductsList>
         <Sidebar openCart={openCart}>
             <Cart>
-                <div style={{width:"100%",display:"flex",alignItems:"center", gap:"10px"}}>
-                    <IconButton aria-label="close" onClick={()=>setOpenCart(!openCart)}>
+                <div>
+                    <IconButton 
+                        aria-label="close" 
+                        onClick={()=>setOpenCart(!openCart)} 
+                        sx={{color:darkMode?"white":"black"}}
+                    >
                         <CloseIcon  />
                     </IconButton>
                     <h3>Seu Pedido</h3>
@@ -287,16 +301,26 @@ const onPlaceOrder = () => {
                         fullWidth
                         InputLabelProps={{shrink: true}}
                         focused
-                        inputProps={{sx:{color:darkMode?"white":"black"}}}
+                        inputProps={{sx:{color:darkMode?"white":"black",colorScheme:darkMode?"dark":""}}}   
                         
                     />
                 </ClientForm>
+                
                 {cartRenderList}
+
                 <Button 
                     variant="contained" 
                     color="secondary" 
                     type="submit"
-                    onClick={onPlaceOrder}>Fechar Pedido</Button>
+                    onClick={onPlaceOrder}
+                    >Fechar Pedido
+                </Button>
+                <Button 
+                    variant="filled" 
+                    color="secondary" 
+                    onClick={clearCart}
+                    >Limpar Carrinho
+                </Button>
             </Cart>
         </Sidebar>
         

@@ -28,17 +28,46 @@ export const Container = styled.div`
       display:flex;
       align-items:flex-end;
       gap:20px;
+      
+      &:nth-child(1){
+         margin-right:20px;
+         align-items:center;
+         border-radius:20px;
+         padding:0 10px;
+         border:none;
+         background-color:rgba(0,0,0,.1);
+         gap:5px;
+
+         span{
+            color:var(--spnCard);
+            font-size:16px;
+            font-weight:bold;
+            letter-spacing:1px;
+         }
+
+         @media (max-width:800px){
+            margin-right:5px;
+            transform:scale(1)
+         }
+
+         @media(max-width:550px){
+            display:none;
+         }
+
+      }
      }
 
+    
+
      @media (max-width:800px){
-        padding: 0 30px;
+        padding: 0 20px;
 
         img,button,div{
          transform:scale(.9)
         }
      }
 
-     @media (max-width:500px){
+     @media (max-width:700px){
         padding: 0 10px;
         img:nth-child(1){
             display:none
