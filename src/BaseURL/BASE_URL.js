@@ -1,1 +1,1 @@
-export const url = process.env.REACT_APP_API_URL
+export const url = "https://antunes-backend-001.herokuapp.com"
