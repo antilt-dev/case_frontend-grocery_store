@@ -9,7 +9,7 @@ const modalStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
-  color:'#b2b2b2',
+  color:'#000',
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor:'white',

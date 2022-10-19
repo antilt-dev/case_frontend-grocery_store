@@ -8,7 +8,7 @@ export const Container = styled.div`
     flex-direction:row;
     align-items:center;
     justify-content:space-between;
-    border-bottom:solid #b7b7b7 2px;
+    border-bottom:solid var(--bgCard) 2px;
 
     p{
         text-overflow:ellipsis;
@@ -16,9 +16,10 @@ export const Container = styled.div`
         overflow: hidden;
         max-width:80%;
         font-size:16px;
+        color:var(--txtCard);
     }
     span{
-        
+        color:var(--txtCard);
     }
 
     @media (max-width:500px){

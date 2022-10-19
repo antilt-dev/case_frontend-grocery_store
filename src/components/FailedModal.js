@@ -9,7 +9,7 @@ const modalStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
-  color:'#b2b2b2',
+  color:'#000',
   transform: 'translate(-50%, -50%)',
   width: 400,
   ehgiht:200,
@@ -28,7 +28,7 @@ const textStyle = {
     textAlign:"center"
 }
 
-export default function FailedModal() {
+export default function FailedModal({error}) {
 
   const {openModalFailed,setOpenModalFailed} = useContext(GlobalContext)
 
@@ -48,7 +48,7 @@ export default function FailedModal() {
             <img src={alertImg} style={{width: "50px"}}alt="error"/>
           </Typography> 
           <Typography sx={textStyle} id="modal-modal-description" >
-            Tente novamente.
+            {error} 
           </Typography>
         </Box>
       </Modal>

@@ -11,7 +11,7 @@ const ProductCard=({name,price,id,onClick})=>{
       <img src={productImg} alt="not available"/>
       <p>{name}</p>
       <p>R$ <span>{formatedPrice}</span></p>
-      <Button variant="outlined" color="secondary" onClick={()=>onClick(id)}>Adicionar</Button>
+      <Button variant="contained" color="secondary" onClick={()=>onClick(id)}>Adicionar</Button>
    </Container>
   );
 }

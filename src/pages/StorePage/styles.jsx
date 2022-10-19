@@ -4,7 +4,8 @@ export const Container = styled.div`
     min-width:100vw;
     max-width:100%;
     min-height:100vh;
-    background-color:#E8F9F3;
+    min-width:350px;
+    background-color:var(--bgPages);
 `;
 
 export const ProductsList = styled.main`
@@ -13,8 +14,13 @@ export const ProductsList = styled.main`
    display:flex;
    justify-content:center;
    flex-wrap:wrap;
-   gap:5px;
+   gap:15px;
    padding:100px 50px;
+
+  @media(max-width:500px){
+    padding:100px 10px;
+    gap:5px;
+  }
 `;
 
 export const Sidebar = styled.aside`
@@ -23,21 +29,25 @@ export const Sidebar = styled.aside`
     display:flex;
     flex-direction:row;
     position:fixed;
-    right:${({openCart})=> openCart?"0":"-380px"};
+    right:${({openCart})=> openCart?"0":"-500px"};
     bottom:0;
     gap:5px;
-    transition:0.9s ease-in-out;
+    transition:1.2s ease-in-out;
     box-shadow:0px 5px 20px rgb(0 45 98 / 6%);
+
+    @media(max-width:500px){
+        width:100%
+    }
    `;
 
-export const Cart = styled.div`
+export const Cart = styled.form`
     width:100%;
     height:100%;
     gap:10px;
     display:flex;
     flex-direction:column;
     align-items:center;
-    background-color:rgb(255,255,255);
+    background-color:var(--bgPages);
     padding:20px 10px;
     z-index:988;
     overflow-y:scroll;
@@ -50,7 +60,7 @@ export const Cart = styled.div`
 
         h3{
             font-size:20px;
-            color:rgb(45,167,122);
+            color:var(--spnCard);
         }
 `;
 
@@ -63,7 +73,9 @@ export const ClientForm = styled.div`
     justify-content:flex-start;
     gap:15px;
     padding:10px;
+
 `;
+
 
 export const ProductsCart = styled.div`
     width:100%;

@@ -14,7 +14,7 @@ const StockPage=()=>{
   const [data,isLoading,error] = useRequestData(`${url}/products`)
   
   const renderProductList = data?.map((item)=>{
-    return <ProductCard name={item.name} stock={item.qty_stock}/>
+    return <ProductCard name={item.name} stock={item.qty_stock} key={item.id}/>
   })
 
   return (

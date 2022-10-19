@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const sendOrder = (url,body,setOpenSucess,setOpenFailed) => {
+
+const sendOrder = (url,body,setOpenSucess,setOpenFailed,setErrorModal) => {
 
     const headers = {headers:{
         "Content-Type":"application/json"
@@ -13,7 +14,9 @@ const sendOrder = (url,body,setOpenSucess,setOpenFailed) => {
         })
         .catch((err)=>{
             console.log(err.response.data)
+            setErrorModal(err.response.data)
             setOpenFailed(true)
+            
         })
 }
 

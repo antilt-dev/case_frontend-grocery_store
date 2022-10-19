@@ -8,17 +8,24 @@ export const Container = styled.div`
     align-items:center;
     justify-content:space-between;
     box-shadow:0px 5px 20px rgb(0 45 98 / 6%);
-    background-color:rgb(255,255,255);
+    background-color:var(--bgCard);
     gap:10px;
     padding:20px 0;
+    border-radius:15px;
+
+    @media(max-width:500px){
+        width:160px;
+        height:275px;
+    }
 
     img{
         width:60%; 
         filter:opacity(.4)
+        
     }
 
     p{
-        color:#b7b7b7;
+        color:var(--txtCard);
         font-size:14px;
         width:90%;
         text-align:center;
@@ -31,7 +38,7 @@ export const Container = styled.div`
     }
 
     span{
-        color:rgb(45,167,122);
+        color:var(--spnCard);
         font-size:16px;
         font-weight:bold;
     }

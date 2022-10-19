@@ -19,6 +19,16 @@ export default createGlobalStyle`
             width:0;
             height:0;
         }
+
+        --bgCard:${props=>props.theme.bgCard};
+        --txtCard:${props=>props.theme.txtCard};
+        --spnCard:${props=>props.theme.spnCard};
+        --bgHeader:${props=>props.theme.bgHeader};
+        --bgPages:${props=>props.theme.bgPages}
+
+     
         }
+
+        
    
 `;

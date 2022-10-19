@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Cart, ClientForm, Container, ProductsList, Sidebar} from './styles'
+import {Cart, ClientForm, Container, ProductsList, Sidebar, styleTextField} from './styles'
 import useRequestData from "../../hooks/useRequestData";
 import { url } from "../../BaseURL/BASE_URL";
 import ProductCard from "./ProductCard";
@@ -11,8 +11,8 @@ import ButtonCart from "./ButtonCart";
 import { Button, IconButton, TextField } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { SpinnerCircularSplit	 } from 'spinners-react';
-import { goStock } from "../../routes/coordinator";
-import useSendData from "../../services/sendOrder";
+import { goHome, goStock } from "../../routes/coordinator";
+import sendOrder from "../../services/sendOrder";
 import SucessModal from "../../components/SucessModal";
 import FailedModal from "../../components/FailedModal";
 import ErrorModal from "../../components/ErrorModal";
@@ -31,7 +31,15 @@ const StorePage=()=>{
     const [cartPrice,setCartPrice] = useState(0)
     const [deliveryDate,setDeliveryDate] = useState("")
     const [userName,setUserName] = useState("")
-    const {setOpenModalError, setOpenModalSucess,setOpenModalFailed,cart,setCart} = useContext(GlobalContext)
+    const [errorModal, setErrorModal] = useState("")
+    const {setOpenModalError, 
+            setOpenModalSucess,
+            setOpenModalFailed,
+            cart,
+            setCart,
+            darkMode,
+            setDarkMode
+            } = useContext(GlobalContext)
 
     useEffect(()=>{updateCart()},[cart])
 
@@ -185,7 +193,7 @@ const updateCart = () =>{
     }
 
 //send place order to database
-const usePlaceOrder = () => {
+const onPlaceOrder = () => {
     const purchases = cart.map((item)=>{
         return{
             id:item.id,
@@ -198,7 +206,7 @@ const usePlaceOrder = () => {
         purchasedItems:purchases
 
     }
-    useSendData(`${url}/purchases`,body,setOpenModalSucess,setOpenModalFailed)
+    sendOrder(`${url}/purchases`,body,setOpenModalSucess,setOpenModalFailed,setErrorModal)
     clearStates()
 }
 
@@ -226,7 +234,7 @@ const usePlaceOrder = () => {
                 setQty={setManualQty}
                 />
     })
-    
+
    
    
   return (
@@ -239,7 +247,7 @@ const usePlaceOrder = () => {
         />
         
         <SucessModal/>
-        <FailedModal/>
+        <FailedModal error={errorModal}/>
         <ErrorModal/>
 
         <ProductsList>
@@ -265,6 +273,8 @@ const usePlaceOrder = () => {
                         value={userName}
                         onChange={(e)=>setUserName(e.target.value)} 
                         fullWidth
+                        focused
+                        inputProps={{sx:{color:darkMode?"white":"black"}}}
                     />
                     <TextField 
                         required 
@@ -276,10 +286,17 @@ const usePlaceOrder = () => {
                         onChange={(e)=>setDeliveryDate(e.target.value)} 
                         fullWidth
                         InputLabelProps={{shrink: true}}
+                        focused
+                        inputProps={{sx:{color:darkMode?"white":"black"}}}
+                        
                     />
                 </ClientForm>
                 {cartRenderList}
-                <Button variant="contained" color="secondary" onClick={usePlaceOrder}>Fechar Pedido</Button>
+                <Button 
+                    variant="contained" 
+                    color="secondary" 
+                    type="submit"
+                    onClick={onPlaceOrder}>Fechar Pedido</Button>
             </Cart>
         </Sidebar>
         

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width:100vw;
     min-height: 100vh;
+    background-color:var(--bgPages);
 `;
 
 export const StockList = styled.main`
@@ -37,7 +38,7 @@ export const Head = styled.div`
     h1{
         font-size:26px;
         letter-spacing:3px;
-        color:#2da77a;
+        color:var(--spnCard);
     }
 
     div{
@@ -49,7 +50,9 @@ export const Head = styled.div`
 
         p{
             font-size:18px;
-            font-weight:bold
+            font-weight:bold;
+            color:var(--spnCard);
+            letter-spacing:2px;
         }
     }
 `;
