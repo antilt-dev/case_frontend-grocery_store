@@ -26,7 +26,7 @@
 
 ## 🔗 Link Surge:
 
-[Link para o site](http://anxious-team.surge.sh/)
+[Link para o site](https://red-class.surge.sh/)
 
 
 ## ✒️ Autor
