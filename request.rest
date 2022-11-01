@@ -1,2 +1,14 @@
 ###
-GET https://antunes-backend-001.herokuapp.com/products
+POST http://localhost:3003/purchases/
+Content-Type: application/json
+
+{
+    "name":"carlos",
+    "date":"2022-10-02",
+    "purchaseItems":[
+        {
+            "id":16,
+            "quantity":2
+        }
+]
+}

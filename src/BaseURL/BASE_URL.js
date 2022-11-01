@@ -1,1 +1,3 @@
-export const url = "http://localhost:3003"
+import env from "react-dotenv"
+
+export const url = env.API_URL

@@ -59,10 +59,8 @@ const StorePage=()=>{
             return product.units  
         })
 
-        totalUnits = totalUnits.reduce((prev,curr)=>{
-           return prev+curr
-       } )
-    setCartUnits(totalUnits)
+        totalUnits = totalUnits.reduce((prev,curr)=> prev+curr)
+        setCartUnits(totalUnits)
        }else{
         return 0
        }     
@@ -75,9 +73,7 @@ const StorePage=()=>{
              return product.units * product.price 
          })
  
-         totalValue = totalValue.reduce((prev,curr)=>{
-            return prev+curr
-        } )
+         totalValue = totalValue.reduce((prev,curr)=> prev+curr)
         setCartPrice(totalValue)
         }else{
          return 0
@@ -207,7 +203,7 @@ const onPlaceOrder = () => {
     const body = {
         name:userName,
         date:deliveryDate,
-        purchasedItems:purchases
+        purchaseItems:purchases
 
     }
     sendOrder(`${url}/purchases/`,body,setOpenModalSucess,setOpenModalFailed,setErrorModal)
@@ -245,88 +241,87 @@ const onPlaceOrder = () => {
    
   return (
     
-   <Container>
-        <Header 
-            buttonChildren="Estoque"
-            onClickNavigate={()=> goStock(navigate)}
-            price={cartPrice}
-            itemsCart={cartUnits}
-            toggleCart={()=>setOpenCart(!openCart)}
-        />
-        
-        <SucessModal/>
-        <FailedModal error={errorModal}/>
-        <ErrorModal/>
-        <Tools>
-            <DarkSwitch/>
-        </Tools>
-        <ProductsList>
-            {isLoading && !error && <SpinnerCircularSplit/>}
-            {error&& !data && <p>Erro ao carregar os produtos.</p>}
-            {productsRenderList}
-        </ProductsList>
-        <Sidebar openCart={openCart}>
-            <Cart>
-                <div>
-                    <IconButton 
-                        aria-label="close" 
-                        onClick={()=>setOpenCart(!openCart)} 
-                        sx={{color:darkMode?"white":"black"}}
-                    >
-                        <CloseIcon  />
-                    </IconButton>
-                    <h3>Seu Pedido</h3>
-                </div>
-                
-                <ClientForm>
-                    <TextField
-                        required
-                        label="Nome"
-                        variant="outlined"
-                        color="secondary"
-                        value={userName}
-                        onChange={(e)=>setUserName(e.target.value)} 
-                        fullWidth
-                        focused
-                        inputProps={{sx:{color:darkMode?"white":"black"}}}
-                    />
-                    <TextField 
-                        required 
-                        label="Data da entrega"
-                        variant="outlined"
-                        type="date"
-                        color="secondary"
-                        value={deliveryDate}
-                        onChange={(e)=>setDeliveryDate(e.target.value)} 
-                        fullWidth
-                        InputLabelProps={{shrink: true}}
-                        focused
-                        inputProps={{sx:{color:darkMode?"white":"black",colorScheme:darkMode?"dark":""}}}   
-                        
-                    />
-                </ClientForm>
-                
-                {cartRenderList}
+    <Container>
+            <Header 
+                buttonChildren="Estoque"
+                onClickNavigate={()=> goStock(navigate)}
+                price={cartPrice}
+                itemsCart={cartUnits}
+                toggleCart={()=>setOpenCart(!openCart)}
+            />
+            
+            <SucessModal/>
+            <FailedModal error={errorModal}/>
+            <ErrorModal/>
+            <Tools>
+                <DarkSwitch/>
+            </Tools>
+            <ProductsList>
+                {isLoading && !error && <SpinnerCircularSplit/>}
+                {error&& !data && <p>Erro ao carregar os produtos.</p>}
+                {productsRenderList}
+            </ProductsList>
+            <Sidebar openCart={openCart}>
+                <Cart>
+                    <div>
+                        <IconButton 
+                            aria-label="close" 
+                            onClick={()=>setOpenCart(!openCart)} 
+                            sx={{color:darkMode?"white":"black"}}
+                        >
+                            <CloseIcon  />
+                        </IconButton>
+                        <h3>Seu Pedido</h3>
+                    </div>
+                    
+                    <ClientForm>
+                        <TextField
+                            required
+                            label="Nome"
+                            variant="outlined"
+                            color="secondary"
+                            fullWidth
+                            focused
+                            value={userName}
+                            onChange={(e)=>setUserName(e.target.value)} 
+                            inputProps={{sx:{color:darkMode?"white":"black"}}}
+                        />
+                        <TextField 
+                            required 
+                            label="Data da entrega"
+                            variant="outlined"
+                            type="date"
+                            color="secondary"
+                            fullWidth
+                            focused
+                            value={deliveryDate}
+                            onChange={(e)=>setDeliveryDate(e.target.value)} 
+                            InputLabelProps={{shrink: true}}
+                            inputProps={{sx:{color:darkMode?"white":"black",colorScheme:darkMode?"dark":""}}}   
+                        />
+                    </ClientForm>
 
-                <Button 
-                    variant="contained" 
-                    color="secondary" 
-                    type="submit"
-                    onClick={onPlaceOrder}
-                    >Fechar Pedido
-                </Button>
-                <Button 
-                    variant="filled" 
-                    color="secondary" 
-                    onClick={clearCart}
-                    >Limpar Carrinho
-                </Button>
-            </Cart>
-        </Sidebar>
-        
-        
-   </Container>
-   
+                    {cartRenderList}
+
+                    <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        type="submit"
+                        onClick={onPlaceOrder}
+                        >Fechar Pedido
+                    </Button>
+                    <Button 
+                        variant="filled" 
+                        color="secondary" 
+                        onClick={clearCart}
+                        >
+                        Limpar Carrinho</Button>
+                </Cart>
+            </Sidebar>
+            
+            
+    </Container>
+    
   );
 }
 
