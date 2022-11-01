@@ -11,7 +11,7 @@ import { SpinnerCircularSplit	 } from 'spinners-react';
 const StockPage=()=>{
   const navigate = useNavigate()
 
-  const [data,isLoading,error] = useRequestData(`${url}/products`)
+  const [data,isLoading,error] = useRequestData(`${url}/products/getAll`)
   
   const renderProductList = data?.map((item)=>{
     return <ProductCard name={item.name} stock={item.qty_stock} key={item.id}/>
@@ -29,7 +29,7 @@ const StockPage=()=>{
           </div>
         </Head>
         {isLoading && !error && <SpinnerCircularSplit/>}
-        {error && <p>Erro ao carregar os produtos.</p>}
+        {error && !data && <p>Erro ao carregar os produtos.</p>}
         {renderProductList}
       </StockList>
 

@@ -25,7 +25,7 @@ const StorePage=()=>{
 
     const navigate = useNavigate()
 
-    const [data,isLoading,error] = useRequestData(`${url}/products`)
+    const [data,isLoading,error] = useRequestData(`${url}/products/getAll`)
     const [cartUnits,setCartUnits] = useState(0)
     const [openCart,setOpenCart] = useState(false)
     const [cartPrice,setCartPrice] = useState(0)
@@ -210,7 +210,7 @@ const onPlaceOrder = () => {
         purchasedItems:purchases
 
     }
-    sendOrder(`${url}/purchases`,body,setOpenModalSucess,setOpenModalFailed,setErrorModal)
+    sendOrder(`${url}/purchases/`,body,setOpenModalSucess,setOpenModalFailed,setErrorModal)
     clearCart()
     clearForm()
     setOpenCart(false)
@@ -262,7 +262,7 @@ const onPlaceOrder = () => {
         </Tools>
         <ProductsList>
             {isLoading && !error && <SpinnerCircularSplit/>}
-            {error && <p>Erro ao carregar os produtos.</p>}
+            {error&& !data && <p>Erro ao carregar os produtos.</p>}
             {productsRenderList}
         </ProductsList>
         <Sidebar openCart={openCart}>

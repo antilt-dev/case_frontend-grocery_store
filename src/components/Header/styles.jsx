@@ -76,4 +76,8 @@ export const Container = styled.div`
          display:block
         }
      }
+
+     @media(max-width:550px){
+      box-shadow:none
+     }
 `;

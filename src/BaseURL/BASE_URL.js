@@ -1,1 +1,1 @@
-export const url = "https://antunes-backend-001.herokuapp.com"
+export const url = "http://localhost:3003"
